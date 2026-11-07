@@ -4,3 +4,8 @@ __pycache__/
 .env
 *.log
 .DS_Store
+# Генерируемые артефакты week-01/python
+week-01/python/Analyze.txt
+week-01/python/report.txt
+week-01/python/report2.txt
+week-01/python/sample.txt

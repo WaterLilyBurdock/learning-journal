@@ -2,44 +2,40 @@
 
 from pathlib import Path
 
-BASE = Path(__file__).parent
-INPUT = BASE / "sample.txt"
-REPORT = BASE / "report.txt"
+BASE = Path(__file__).parent #Base - это папка текущего файла
+INPUT = BASE / "sample.txt" # Переменная с выводомм текстового файла
+REPORT = BASE / "report.txt"  #Переменная файла с информацией
 
 
-def ensure_sample(path: Path) -> None:
-    """Создать демо-файл, если его нет."""
+def sample(path: Path) -> None:
+    #Создаём файл если его нет
     if not path.exists():
         path.write_text(
-            "Python — это просто.\n"
-            "Python читают и пишут.\n"
-            "Файлы, строки, слова!\n",
+            "Владик бежал по дорожке,\n"
+            "В друг у него запутались ножки, \n"
+            "ХА-ХА-ХА-ХА",
             encoding="utf-8",
         )
 
-
-def analyze(path: Path) -> dict[str, int]:
-    """Вернуть статистику по текстовому файлу."""
-    text = path.read_text(encoding="utf-8")
-    lines = text.splitlines()
-    words = text.split()
+def analyze(path: Path) -> dict[str,int]:
+    text = path.read_text(encoding="utf-8") #Читает текст
+    lines = text.splitlines() #Разбивает на список строк, убирая символы переноса
+    words = text.split() #Убирает отступы
     return {
-        "lines": len(lines),
-        "words": len(words),
-        "chars": len(text),
-        "chars_no_spaces": len("".join(words)),
-        "empty_lines": sum(1 for line in lines if not line.strip()),
+        "Строк" : len(lines),
+        "Слов" : len(words),
+        "Символов" : len(text),
+        "Символов без пробелов": len("".join(words)),
+        "Пустых строк" : sum(1 for line in lines if not line.strip())
     }
 
-
-def write_report(path: Path, stats: dict[str, int]) -> None:
-    """Записать отчёт в файл."""
-    lines = [f"{k}: {v}" for k, v in stats.items()]
-    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
-
+def write_report(path: Path, stats: dict[str,int]) -> None:
+    #Записываем отчёт в файл
+    lines = [f"{k}:{i}" for k,i in stats.items()]
+    path.write_text("\n".join(lines) + "\n", encoding ="utf-8")
 
 if __name__ == "__main__":
-    ensure_sample(INPUT)
+    sample(INPUT)
     stats = analyze(INPUT)
 
     print(f"Файл: {INPUT.name}")
