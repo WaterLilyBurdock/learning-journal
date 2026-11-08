@@ -3,7 +3,7 @@
 import math
 
 
-class NegativeNumberError(ValueError):
+class NegativeNumberError(ValueError): #ValueError в скобках — это родительский класс (base class, superclass). NegativeNumberError — дочерний (subclass, derived).
     """Своё исключение: аргумент не может быть отрицательным."""
 
     def __init__(self, value: float) -> None:
@@ -11,7 +11,7 @@ class NegativeNumberError(ValueError):
         super().__init__(f"Отрицательное значение недопустимо: {value}")
 
 
-def safe_div(a: str | float, b: str | float) -> float:
+def safe_div(a: str | float, b: str | float) -> float: # | - значение(или) - анотация типов
     """Делит a на b, приводит строки к float и обрабатывает ошибки явно."""
     try:
         x = float(a)
@@ -29,7 +29,7 @@ def sqrt_safe(x: float) -> float:
     """Корень, но отрицательные — через своё исключение."""
     if x < 0:
         raise NegativeNumberError(x)
-    return math.sqrt(x)
+    return math.sqrt(x) #Квадратный корень x
 
 
 def demo() -> None:
