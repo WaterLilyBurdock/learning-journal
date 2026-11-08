@@ -8,7 +8,7 @@
 
 from __future__ import annotations
 
-import argparse
+import argparse # разбор аргументов командной строки
 import re
 import sys
 from collections import Counter
